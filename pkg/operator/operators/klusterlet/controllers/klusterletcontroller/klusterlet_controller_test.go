@@ -414,7 +414,6 @@ func assertKlusterletDeployment(t *testing.T, actions []clienttesting.Action, ve
 
 }
 
-
 func assertRegistrationDeployment(t *testing.T, actions []clienttesting.Action, verb, serverURL, clusterName string, replica int32, awsAuth bool) {
 	deployment := getDeployments(actions, verb, "registration-agent")
 	if deployment == nil {
@@ -1048,7 +1047,6 @@ func TestAWSIrsaAuthInNonSingletonMode(t *testing.T) {
 	assertRegistrationDeployment(t, controller.kubeClient.Actions(), createVerb, "", "cluster1", 1, true)
 }
 
-
 func TestReplica(t *testing.T) {
 	klusterlet := newKlusterlet("klusterlet", "testns", "cluster1")
 	hubSecret := newSecret(helpers.HubKubeConfig, "testns")
@@ -1115,7 +1113,7 @@ func TestReplica(t *testing.T) {
 	}
 
 	// should have 3 replicas for clusters with multiple nodes
-	assertRegistrationDeployment(t, controller.kubeClient.Actions(), "update", "", "cluster1", 3 ,false)
+	assertRegistrationDeployment(t, controller.kubeClient.Actions(), "update", "", "cluster1", 3, false)
 	assertWorkDeployment(t, controller.kubeClient.Actions(), "update", "cluster1", operatorapiv1.InstallModeDefault, 3)
 }
 
@@ -1136,7 +1134,7 @@ func TestClusterNameChange(t *testing.T) {
 	}
 
 	// Check if deployment has the right cluster name set
-	assertRegistrationDeployment(t, controller.kubeClient.Actions(), createVerb, "", "cluster1", 1 ,false)
+	assertRegistrationDeployment(t, controller.kubeClient.Actions(), createVerb, "", "cluster1", 1, false)
 
 	operatorAction := controller.operatorClient.Actions()
 	testingcommon.AssertActions(t, operatorAction, "patch")

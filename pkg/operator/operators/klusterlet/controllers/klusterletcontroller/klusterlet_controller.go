@@ -111,6 +111,7 @@ func NewKlusterletController(
 		WithInformersQueueKeysFunc(queue.QueueKeyByMetaName, klusterletInformer.Informer()).
 		ToController("KlusterletController", recorder)
 }
+
 type AwsIrsa struct {
 	HubClusterArn string
 }
@@ -119,6 +120,7 @@ type RegistrationDriver struct {
 	AuthType string
 	AwsIrsa  *AwsIrsa
 }
+
 // klusterletConfig is used to render the template of hub manifests
 type klusterletConfig struct {
 	KlusterletName string
@@ -182,7 +184,7 @@ type klusterletConfig struct {
 	DisableAddonNamespace bool
 
 	// Labels of the agents are synced from klusterlet CR.
-	Labels map[string]string
+	Labels             map[string]string
 	RegistrationDriver RegistrationDriver
 }
 
